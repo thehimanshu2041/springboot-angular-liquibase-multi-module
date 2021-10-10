@@ -1,0 +1,31 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+    <changeSet author="h3kumar" id="CUEUREC-2041-28032021-01">
+        <addPrimaryKey columnNames="USER_ID, USER_ROLE_ID" tableName="USER_ENTITY_USER_ROLE_ENTITY"/>
+    </changeSet>
+
+    <changeSet author="h3kumar" id="CUEUREC-2041-28032021-02">
+        <addForeignKeyConstraint baseColumnNames="USER_ID"
+                                 baseTableName="USER_ENTITY_USER_ROLE_ENTITY"
+                                 constraintName="USER_ENTITY_USER_ROLE_ENTITY_FK_01"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 referencedColumnNames="USER_ID"
+                                 referencedTableName="USER_ENTITY"/>
+    </changeSet>
+
+    <changeSet author="h3kumar" id="CUEUREC-2041-28032021-03">
+        <addForeignKeyConstraint baseColumnNames="USER_ROLE_ID"
+                                 baseTableName="USER_ENTITY_USER_ROLE_ENTITY"
+                                 constraintName="USER_ENTITY_USER_ROLE_ENTITY_FK_02"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 referencedColumnNames="USER_ROLE_ID"
+                                 referencedTableName="USER_ROLE_ENTITY"/>
+    </changeSet>
+</databaseChangeLog>

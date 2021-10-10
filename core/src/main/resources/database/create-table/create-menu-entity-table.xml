@@ -1,0 +1,75 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+  <changeSet author="h3kumar" id="CMET-2041-21082021-01">
+    <preConditions onFail="MARK_RAN">
+      <not>
+        <tableExists tableName="MENU_ENTITY"/>
+      </not>
+    </preConditions>
+    <createTable tableName="MENU_ENTITY">
+      <column autoIncrement="true" name="MENU_ID" type="BIGINT">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="MENU_ENTITY_PK"/>
+      </column>
+      <column name="MENU_PARENT_ID" type="BIGINT">
+        <constraints nullable="false"/>
+      </column>
+      <column name="MENU_NAME" type="VARCHAR(50)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="MENU_PATH" type="VARCHAR(50)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="MENU_DESCRIPTION" type="VARCHAR(50)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="MENU_ICON" type="VARCHAR(50)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="MENU_KEY" type="VARCHAR(50)">
+        <constraints nullable="false" unique="true"/>
+      </column>
+      <column name="MENU_ACTIVE" type="BOOLEAN">
+        <constraints nullable="false"/>
+      </column>
+      <column name="MENU_IS_DELETED" type="BOOLEAN">
+        <constraints nullable="false"/>
+      </column>
+      <column name="MENU_IS_ADMIN" type="BOOLEAN">
+        <constraints nullable="false"/>
+      </column>
+      <column name="MENU_IS_VISIBLE" type="BOOLEAN">
+        <constraints nullable="false"/>
+      </column>
+      <column name="MENU_IS_AUTH_REQ" type="BOOLEAN">
+        <constraints nullable="false"/>
+      </column>
+      <column name="MENU_PRIORITY" type="BIGINT">
+        <constraints nullable="true"/>
+      </column>
+      <column name="MENU_CREATED_BY" type="VARCHAR(25)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="MENU_UPDATED_BY" type="VARCHAR(25)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="MENU_CREATED_DATE_TIME" type="TIMESTAMP WITHOUT TIME ZONE">
+        <constraints nullable="false"/>
+      </column>
+      <column name="MENU_MODIFIED_DATE_TIME" type="TIMESTAMP WITHOUT TIME ZONE">
+        <constraints nullable="false"/>
+      </column>
+
+    </createTable>
+  </changeSet>
+
+  <changeSet author="h3kumar" id="CMETS-2041-21082021-02">
+    <createSequence cycle="false" incrementBy="1" maxValue="2147483647"
+                    minValue="1000000001" sequenceName="MENU_ENTITY_SEQ" startValue="1000000001"/>
+  </changeSet>
+
+</databaseChangeLog>

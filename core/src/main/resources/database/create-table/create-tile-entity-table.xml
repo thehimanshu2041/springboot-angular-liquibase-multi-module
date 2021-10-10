@@ -1,0 +1,65 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+  <changeSet author="h3kumar" id="CTET-2041-28092021-01">
+    <preConditions onFail="MARK_RAN">
+      <not>
+        <tableExists tableName="TILE_ENTITY"/>
+      </not>
+    </preConditions>
+    <createTable tableName="TILE_ENTITY">
+      <column autoIncrement="true" name="TILE_ID" type="BIGINT">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="TILE_ENTITY_PK"/>
+      </column>
+      <column name="TILE_KEY" type="VARCHAR(10)">
+        <constraints nullable="false" unique="true"/>
+      </column>
+      <column name="TILE_SHORT_DESCRIPTION" type="VARCHAR(50)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="TILE_DESCRIPTION" type="VARCHAR(100)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="TILE_TYPE" type="VARCHAR(25)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="TILE_COMPONENT" type="VARCHAR(250)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="TILE_ICON" type="VARCHAR(25)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="TILE_IS_ACCESSED" type="BOOLEAN">
+        <constraints nullable="false"/>
+      </column>
+      <column name="TILE_IS_DELETE" type="BOOLEAN">
+        <constraints nullable="false"/>
+      </column>
+      <column name="TILE_PRIORITY" type="BIGINT">
+        <constraints nullable="true"/>
+      </column>
+      <column name="TILE_CREATED_BY" type="VARCHAR(25)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="TILE_UPDATED_BY" type="VARCHAR(25)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="TILE_CREATED_DATE_TIME" type="TIMESTAMP WITHOUT TIME ZONE">
+        <constraints nullable="false"/>
+      </column>
+      <column name="TILE_MODIFIED_DATE_TIME" type="TIMESTAMP WITHOUT TIME ZONE">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+  </changeSet>
+
+  <changeSet author="h3kumar" id="CTET-2041-28092021-02">
+    <createSequence cycle="false" incrementBy="1" maxValue="2147483647"
+                    minValue="1000000001" sequenceName="TILE_ENTITY_SEQ" startValue="1000000001"/>
+  </changeSet>
+
+</databaseChangeLog>

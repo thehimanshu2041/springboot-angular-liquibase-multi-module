@@ -1,0 +1,32 @@
+<div class="container" fxLayout="column" id="alert_area_{{instanceId}}">
+  <div *ngFor="let alert of alertsOnDisplay; let i = index" [@alertShown]="'visible'">
+    <div class="alert alert-dismissible animated fadeIn d-flex justify-content-start align-items-center py-1 pr-1"
+      [ngClass]="'alert-' + alert.getType()">
+      <div *ngIf="alert?.message" class="d-flex align-items-center">
+        <i class="fas fa-check fa-2x animated flip mr-2" aria-hidden="true" *ngIf="alert?.severity === 'success'"></i>
+        <i class="fas fa-info-circle fa-2x animated flip mr-2" aria-hidden="true"
+          *ngIf="alert?.severity === 'info'"></i>
+        <i class="fas fa-exclamation-circle fa-2x animated flip mr-2" aria-hidden="true"
+          *ngIf="alert?.severity === 'warn'"></i>
+        <i class="fas fa-exclamation-circle fa-2x animated flip mr-2" aria-hidden="true"
+          *ngIf="alert?.severity === 'error'"></i>
+        <span class="ml-2 animated flash text-wrap" [class.text-break-all]="alert.longWords"
+          [innerHTML]="alert.message | translate : alert.argv"></span>
+      </div>
+      <button type="button" mat-icon-button class="ml-auto" aria-label="Close" (click)="closeAlert(i)">
+        <mat-icon fontSet="fas" fontIcon="fa-times-circle"></mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
+
+<ng-template #snackbarTemplate let-data>
+  <div fxLayoutAlign="start center">
+    <div [innerHTML]="data.message" fxFlex></div>
+    <div *ngIf="!data.autoclose">
+      <button mat-icon-button (click)="dismissSnackbar()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+</ng-template>

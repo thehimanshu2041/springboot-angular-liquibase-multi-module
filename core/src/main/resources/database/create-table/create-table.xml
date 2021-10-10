@@ -1,0 +1,22 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+  <include file="/database/create-table/create-user-entity-table.xml"/>
+  <include file="/database/create-table/create-user-role-entity-table.xml"/>
+  <include file="/database/create-table/create-menu-entity-table.xml"/>
+  <include file="/database/create-table/create-user-entity-user-role-entity-table.xml"/>
+  <include file="/database/create-table/create-code-type-entity-table.xml"/>
+  <include file="/database/create-table/create-code-entity-table.xml"/>
+  <include file="/database/create-table/create-tile-entity-table.xml"/>
+  <include file="/database/create-table/create-address-entity-table.xml"/>
+  <include file="/database/create-table/create-card-entity-table.xml"/>
+  <include file="/database/create-table/create-ip-entity-table.xml"/>
+  <include file="/database/create-table/create-country-entity-table.xml"/>
+  <include file="/database/create-table/create-state-entity-table.xml"/>
+  <include file="/database/create-table/create-city-entity-table.xml"/>
+
+</databaseChangeLog>

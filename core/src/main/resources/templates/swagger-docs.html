@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Everest Service Swagger</title>
+
+  <link type="text/css" rel="stylesheet" th:href="@{/swagger/css/swagger-ui.css}">
+  <link type="text/css" rel="stylesheet" th:href="@{/swagger/css/theme-material.css}">
+  <script type="text/javascript" th:src="@{/swagger/js/swagger-ui-bundle.js}"></script>
+  <script type="text/javascript" th:src="@{/swagger/js/swagger-ui-standalone-preset.js}"></script>
+</head>
+
+<body>
+<div id="swagger-ui"></div>
+<script>
+    window.onload = function() {
+      const ui = SwaggerUIBundle({
+        url: "/trisul/swagger-docs",
+        dom_id: '#swagger-ui',
+        deepLinking: true,
+        presets: [
+          SwaggerUIBundle.presets.apis,
+          SwaggerUIStandalonePreset
+        ],
+        plugins: [
+          SwaggerUIBundle.plugins.DownloadUrl
+        ],
+        layout: "StandaloneLayout"
+      })
+      window.ui = ui
+    }
+
+
+</script>
+</body>
+</html>

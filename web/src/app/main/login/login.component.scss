@@ -1,0 +1,15 @@
+:host {
+  mat-form-field{
+    width: 100%
+  }
+
+  // ::ng-deep
+  //   .mat-form-field-infix
+  //   .mat-form-field-label-wrapper
+  //   .mat-form-field-label {
+  //   mat-label,
+  //   span {
+  //     background: white;
+  //   }
+  // }
+}

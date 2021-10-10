@@ -1,0 +1,92 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+  <changeSet author="h3kumar" id="CAET-2041-01102021-01">
+    <preConditions onFail="MARK_RAN">
+      <not>
+        <tableExists tableName="IP_ENTITY"/>
+      </not>
+    </preConditions>
+    <createTable tableName="IP_ENTITY">
+      <column autoIncrement="true" name="IP_ID" type="BIGINT">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="IP_ENTITY_PK"/>
+      </column>
+      <column name="IP_TOKEN" type="VARCHAR(250)">
+        <constraints nullable="true"/>
+      </column>
+      <column name="IP_USERNAME" type="VARCHAR(250)">
+        <constraints nullable="true"/>
+      </column>
+      <column name="IP_PORT" type="VARCHAR(10)">
+        <constraints nullable="true"/>
+      </column>
+      <column name="IP_METHOD" type="VARCHAR(25)">
+        <constraints nullable="true"/>
+      </column>
+      <column name="IP_CONTEXT_PATH" type="VARCHAR(100)">
+        <constraints nullable="true"/>
+      </column>
+      <column name="IP_REQUEST_PATH" type="VARCHAR(100)">
+        <constraints nullable="true"/>
+      </column>
+      <column name="IP_ADDRESS" type="VARCHAR(100)">
+        <constraints nullable="true"/>
+      </column>
+      <column name="IP_POSTAL_CODE" type="VARCHAR(100)">
+        <constraints nullable="true"/>
+      </column>
+      <column name="IP_LATITUDE" type="VARCHAR(100)">
+        <constraints nullable="true"/>
+      </column>
+      <column name="IP_LONGITUDE" type="VARCHAR(100)">
+        <constraints nullable="true"/>
+      </column>
+      <column name="IP_CITY" type="VARCHAR(100)">
+        <constraints nullable="true"/>
+      </column>
+      <column name="IP_STATE" type="VARCHAR(100)">
+        <constraints nullable="true"/>
+      </column>
+      <column name="IP_COUNTRY" type="VARCHAR(100)">
+        <constraints nullable="true"/>
+      </column>
+      <column name="IP_METRO_CODE" type="VARCHAR(100)">
+        <constraints nullable="true"/>
+      </column>
+      <column name="IP_AREA_CODE" type="VARCHAR(100)">
+        <constraints nullable="true"/>
+      </column>
+      <column name="IP_NUM" type="VARCHAR(100)">
+        <constraints nullable="true"/>
+      </column>
+      <column name="IP_URL" type="VARCHAR(100)">
+        <constraints nullable="true"/>
+      </column>
+      <column name="IP_REFERER" type="VARCHAR(100)">
+        <constraints nullable="true"/>
+      </column>
+      <column name="IP_CREATED_BY" type="VARCHAR(25)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="IP_UPDATED_BY" type="VARCHAR(25)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="IP_CREATED_DATE_TIME" type="TIMESTAMP WITHOUT TIME ZONE">
+        <constraints nullable="false"/>
+      </column>
+      <column name="IP_MODIFIED_DATE_TIME" type="TIMESTAMP WITHOUT TIME ZONE">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+  </changeSet>
+
+  <changeSet author="h3kumar" id="CAET-2041-01102021-02">
+    <createSequence cycle="false" incrementBy="1" maxValue="2147483647"
+                    minValue="1000000001" sequenceName="IP_ENTITY_SEQ" startValue="1000000001"/>
+  </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,37 @@
+<mat-progress-spinner
+  mode="indeterminate"
+  aria-label="In progress"
+  color="accent"
+  class="align-self-center mr-auto ml-auto"
+  *ngIf="subscription | tsWorking"
+></mat-progress-spinner>
+
+<div fxLayout="column" fxLayoutGap="0.5rem">
+  <span fxLayout="row" fxLayoutAlign="start center"
+    ><mat-icon class="mr-2">person_outline</mat-icon
+    ><span
+      >{{ userDetail.title.codeShortDescription }} {{ userDetail.firstName }}
+      {{ userDetail.lastName }}</span
+    ></span
+  >
+  <span fxLayout="row" fxLayoutAlign="start center"
+    ><mat-icon class="mr-2">account_circle</mat-icon
+    ><span>{{ userDetail.gender.codeShortDescription }}</span></span
+  >
+  <span fxLayout="row" fxLayoutAlign="start center"
+    ><mat-icon class="mr-2">perm_identity</mat-icon
+    ><span>{{ userDetail.username }}</span></span
+  >
+  <span fxLayout="row" fxLayoutAlign="start center"
+    ><mat-icon class="mr-2">mail</mat-icon
+    ><span>{{ userDetail.email }}</span></span
+  >
+  <span fxLayout="row" fxLayoutAlign="start center"
+    ><mat-icon class="mr-2">call</mat-icon
+    ><span>{{ userDetail.mobile }}</span></span
+  >
+  <span fxLayout="row" fxLayoutAlign="start center"
+    ><mat-icon class="mr-2">today</mat-icon
+    ><span>{{ userDetail.dob | date }}</span></span
+  >
+</div>

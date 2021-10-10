@@ -1,0 +1,4 @@
+@import "./ts.typography.mapping.scss";
+
+$ts-mat-type-config: get-default-type-config($font-family-base);
+@include mat-core($ts-mat-type-config);

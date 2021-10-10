@@ -1,0 +1,12 @@
+{
+  "main": {
+    "login": {
+      "title": "Trisul",
+      "label": {
+        "username": "Username",
+        "password": "Password",
+        "login": "Login"
+      }
+    }
+  }
+}

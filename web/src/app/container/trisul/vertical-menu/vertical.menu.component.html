@@ -1,0 +1,19 @@
+<a mat-list-item [ngStyle]="{'padding-left': (depth * 12) + 'px'}" (click)="onItemSelected(item)"
+  [ngClass]="{'active': item.menuPath ? router.isActive(item.menuPath, true): false, 'expanded': expanded}"
+  class="menu-list-item">
+  <span>{{item.menuName}}</span>
+  <span class="spacer"></span>
+  <ng-template [ngIf]="item.children?.length" [ngIfElse]="itemMenu">
+    <mat-icon [@indicatorRotate]="expanded ? 'expanded': 'collapsed'">
+      expand_more
+    </mat-icon>
+  </ng-template>
+  <ng-template #itemMenu>
+    <mat-icon *ngIf="item.menuIcon">{{item.menuIcon}}</mat-icon>
+  </ng-template>
+</a>
+<mat-divider></mat-divider>
+<div *ngIf="expanded">
+  <ts-vertical-menu-component *ngFor="let child of item.children" [item]="child" [depth]="depth+1">
+  </ts-vertical-menu-component>
+</div>

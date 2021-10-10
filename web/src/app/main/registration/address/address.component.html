@@ -1,0 +1,56 @@
+<ng-container *ngIf="addressForm != null">
+  <form [formGroup]="addressForm">
+    <div class="mt-3" fxLayout="column" fxLayoutGap="1rem">
+      <mat-form-field class="w-50">
+        <mat-label>Search</mat-label>
+        <input matInput formControlName="search" />
+      </mat-form-field>
+
+      <mat-form-field class="w-25">
+        <mat-label>Address1</mat-label>
+        <input matInput formControlName="addressAddress1" />
+        <mat-error>Address required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="w-25">
+        <mat-label>Address2</mat-label>
+        <input matInput formControlName="addressAddress2" />
+      </mat-form-field>
+
+      <mat-form-field class="w-25">
+        <mat-label>Address3</mat-label>
+        <input matInput formControlName="addressAddress3" />
+      </mat-form-field>
+
+      <mat-form-field class="w-25">
+        <mat-label>Country</mat-label>
+        <mat-select formControlName="addressCountry">
+          <mat-option *ngFor="let c of availableCountry$ | async" [value]="c">
+            {{ c.cscShortDescription }}
+          </mat-option>
+        </mat-select>
+        <mat-error>Country required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="w-25">
+        <mat-label>State</mat-label>
+        <mat-select formControlName="addressState">
+          <mat-option *ngFor="let c of availableState$ | async" [value]="c">
+            {{ c.cscShortDescription }}
+          </mat-option>
+        </mat-select>
+        <mat-error>State required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="w-25">
+        <mat-label>City</mat-label>
+        <mat-select formControlName="addressCity">
+          <mat-option *ngFor="let c of availableCity$ | async" [value]="c">
+            {{ c.cscShortDescription }}
+          </mat-option>
+        </mat-select>
+        <mat-error>City required</mat-error>
+      </mat-form-field>
+    </div>
+  </form>
+</ng-container>

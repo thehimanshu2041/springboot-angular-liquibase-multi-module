@@ -1,0 +1,17 @@
+<label [attr.for]="_controlId" [attr.aria-owns]="_controlId">
+  <ng-content></ng-content>
+</label>
+<ng-template [ngIf]="_field && !_field._hasFloatingLabel()">
+  <ng-content select="mat-form-field"></ng-content>
+</ng-template>
+<ng-content select="[other]"></ng-content>
+
+<span *ngIf="!_field">
+  <code>&lt;ts-label&gt;</code> must be used together with
+  <code>&lt;mat-form-field&gt;</code>.
+</span>
+
+<span *ngIf="_field?._hasFloatingLabel()">
+  <code>&lt;ts-label&gt;</code> must NOT be used together with
+  <code>&lt;mat-label&gt;</code>.
+</span>

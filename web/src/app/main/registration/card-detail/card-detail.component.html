@@ -1,0 +1,114 @@
+<ng-template [ngIf]="_initialized">
+  <div
+    card
+    ngForm
+    #cardForm="ngForm"
+    [container]="cardContainer"
+    formatting="true"
+    class="mt-3"
+  >
+    <div fxLayout.lt-md="column" fxLayout.gt-sm="row" fxLayoutGap="1rem">
+      <div fxLayout="column" fxFlexOrder.lt-md="2" fxFlex>
+        <mat-form-field
+          [hideRequiredMarker]="hideRequiredMarker"
+          [color]="_invalidCardNumber ? 'warn' : undefined"
+        >
+          <mat-label>Card Number</mat-label>
+          <input
+            matInput
+            [(ngModel)]="_value.cardNumber"
+            [disabled]="_disabled"
+            card-number
+            name="cardNumber"
+            required
+            (ngModelChange)="_fieldsChanged()"
+          />
+          <mat-error>Card number required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field [hideRequiredMarker]="hideRequiredMarker">
+          <mat-label>First Name</mat-label>
+          <input
+            matInput
+            [(ngModel)]="_value.holderFirstName"
+            [disabled]="_disabled"
+            card-name
+            name="firstName"
+            required
+            (ngModelChange)="_fieldsChanged()"
+          />
+          <mat-error>First name required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field [hideRequiredMarker]="hideRequiredMarker">
+          <mat-label>Last Name</mat-label>
+          <input
+            matInput
+            [(ngModel)]="_value.holderLastName"
+            [disabled]="_disabled"
+            card-name
+            name="lastName"
+            required
+            (ngModelChange)="_fieldsChanged()"
+          />
+          <mat-error>Last name required</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="center center" class="mx-3">
+        <div #cardContainer class="adv-card-container"></div>
+      </div>
+    </div>
+
+    <div fxLayout.lt-md="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="2rem">
+      <input style="display: none" card-expiry #expiryMonth />
+
+      <mat-form-field [hideRequiredMarker]="hideRequiredMarker" fxFlex>
+        <mat-label>Expiry Month</mat-label>
+        <input
+          matInput
+          [(ngModel)]="_value.expiryMonth"
+          [disabled]="_disabled"
+          [maxlength]="2"
+          [max]="12"
+          name="expiryMonth"
+          required
+          (ngModelChange)="_checkMonth(_value.expiryMonth)"
+          (keypress)="_checkDigit($event)"
+        />
+        <mat-error>Expiry month required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field [hideRequiredMarker]="hideRequiredMarker" fxFlex>
+        <mat-label>Expiry Year</mat-label>
+        <input
+          matInput
+          [(ngModel)]="_value.expiryYear"
+          [disabled]="_disabled"
+          card-expiry
+          [maxlength]="2"
+          name="expiryYear"
+          [pattern]="'[0-9][0-9]'"
+          required
+          (ngModelChange)="_fieldsChanged()"
+        />
+        <mat-error>Expiry year required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field [hideRequiredMarker]="hideRequiredMarker" fxFlex>
+        <mat-label>CVV</mat-label>
+        <input
+          matInput
+          [(ngModel)]="_value.cvv"
+          [disabled]="_disabled"
+          card-cvc
+          name="cvv"
+          [pattern]="'[0-9]+'"
+          required
+          (ngModelChange)="_fieldsChanged()"
+        />
+        <mat-error>CVV required</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+</ng-template>

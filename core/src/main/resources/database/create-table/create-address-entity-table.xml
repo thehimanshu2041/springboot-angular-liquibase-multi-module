@@ -1,0 +1,59 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+  <changeSet author="h3kumar" id="CAET-2041-01102021-01">
+    <preConditions onFail="MARK_RAN">
+      <not>
+        <tableExists tableName="ADDRESS_ENTITY"/>
+      </not>
+    </preConditions>
+    <createTable tableName="ADDRESS_ENTITY">
+      <column autoIncrement="true" name="ADDRESS_ID" type="BIGINT">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="ADDRESS_ENTITY_PK"/>
+      </column>
+      <column name="ADDRESS_USER_ID" type="BIGINT" remarks="parent primary key">
+        <constraints nullable="false"/>
+      </column>
+      <column name="ADDRESS_ADDRESS1" type="VARCHAR(250)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="ADDRESS_ADDRESS2" type="VARCHAR(250)">
+        <constraints nullable="true"/>
+      </column>
+      <column name="ADDRESS_ADDRESS3" type="VARCHAR(250)">
+        <constraints nullable="true"/>
+      </column>
+      <column name="ADDRESS_CITY" type="BIGINT">
+        <constraints nullable="false"/>
+      </column>
+      <column name="ADDRESS_STATE" type="BIGINT">
+        <constraints nullable="false"/>
+      </column>
+      <column name="ADDRESS_COUNTRY" type="BIGINT">
+        <constraints nullable="false"/>
+      </column>
+      <column name="ADDRESS_CREATE_BY" type="VARCHAR(25)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="ADDRESS_UPDATED_BY" type="VARCHAR(25)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="ADDRESS_CREATED_DATE_TIME" type="TIMESTAMP WITHOUT TIME ZONE">
+        <constraints nullable="false"/>
+      </column>
+      <column name="ADDRESS_MODIFIED_DATE_TIME" type="TIMESTAMP WITHOUT TIME ZONE">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+  </changeSet>
+
+  <changeSet author="h3kumar" id="CAET-2041-01102021-02">
+    <createSequence cycle="false" incrementBy="1" maxValue="2147483647"
+                    minValue="1000000001" sequenceName="ADDRESS_ENTITY_SEQ" startValue="1000000001"/>
+  </changeSet>
+
+</databaseChangeLog>

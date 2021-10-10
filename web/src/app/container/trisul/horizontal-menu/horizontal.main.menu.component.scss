@@ -1,0 +1,9 @@
+:host {
+  .mat-list-base {
+    padding-top: 0px !important;
+  }
+}
+
+::ng-deep .mat-menu-content {
+  padding: 0px !important;
+}

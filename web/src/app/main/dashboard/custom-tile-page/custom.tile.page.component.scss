@@ -1,0 +1,145 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
+@mixin make-tile($col, $row) {
+	@include media-breakpoint-up(lg) {
+		grid-column: auto / span $col;
+		grid-row: auto / span $row;
+		& > * {
+			height: 100%;
+		}
+	}
+	@include media-breakpoint-down(md) {
+		grid-column: auto;
+		grid-row: auto;
+	}
+	@include media-breakpoint-down(xs) {
+		&.content-item-card {
+			max-width: calc(100vw - #{$grid-gutter-width});
+		}
+	}
+}
+
+:host .content-container {
+	display: grid;
+
+	&:not(.content-container-single-column) {
+		@include media-breakpoint-up(lg) {
+			grid-template-columns: repeat(3, minmax(30%, 34%));
+		}
+
+		@include media-breakpoint-down(md) {
+			grid-template-columns: repeat(1, 100%);
+		}
+
+		& > {
+			@for $r from 1 through 3 {
+				@for $c from 1 through 3 {
+					.content-item-c#{$c}#{$r} {
+						@include make-tile($c, $r);
+					}
+				}
+			}
+
+			.content-item-c3 {
+				@include make-tile(3, 1);
+			}
+		}
+	}
+
+	&.content-container-single-column {
+		grid-template-columns: repeat(1, 100%);
+	}
+
+	&.content-cards {
+		grid-gap: 1rem;
+	}
+
+	grid-auto-rows: minmax(auto, auto);
+
+	.content-item-header-fixed {
+		height: 2.5rem;
+	}
+
+	.content-item-overlay {
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.draggable-handler {
+		cursor: move;
+	}
+
+	.content-tile-menu {
+		top: -10px;
+		left: -10px;
+	}
+}
+
+.shadow{
+	box-shadow: 0 3px 3px -2px rgba(0,0,0,.2), 0 3px 4px 0 rgba(0,0,0,.14), 0 1px 8px 0 rgba(0,0,0,.12);
+}
+
+.text-night-mode {
+    color: white !important;
+}
+
+
+.text-day-mode {
+    color: var(--theme-primary-500) !important;
+}
+
+// mat-card {
+//     max-height: 300px !important;
+//     min-height: 300px !important;
+//     height: 300px !important;
+//     word-break: break-all;
+//     overflow-x: scroll !important;
+//     overflow-x: hidden !important;
+//     padding: 0px 0px 0px 0px !important;
+//     border-radius: 2px !important;
+// }
+
+// mat-card-header {
+//     padding: 0px !important;
+//     height: auto !important;
+//     height: 40px !important;
+//     max-height: 40px !important;
+//     min-height: 40px !important;
+//     width: 100% !important;
+// }
+
+// mat-card-title {
+//     margin: 0px !important;
+//     font-weight: 600 !important;
+// }
+
+// ::-webkit-scrollbar {
+//     width: 0.5px;
+// }
+
+// ::-webkit-scrollbar-track {
+//     box-shadow: inset 0 0 0.5px #f1f1f1;
+//     border-radius: 0.5px;
+//     margin-top: 5% !important;
+//     margin-bottom: 5% !important;
+// }
+
+// ::-webkit-scrollbar-thumb {
+//     background: var(--theme-primary-300);
+//     border-radius: 0.5px;
+// }
+
+// ::-webkit-scrollbar-thumb:hover {
+//     background: var(--theme-primary-300);
+// }
+
+// .mat-elevation-z5 {
+//     box-shadow: 0 3px 5px -1px rgba(0, 0, 0, .2), 0 5px 8px 0 rgba(0, 0, 0, .14), 0 1px 14px 0 rgba(0, 0, 0, .12);
+// }

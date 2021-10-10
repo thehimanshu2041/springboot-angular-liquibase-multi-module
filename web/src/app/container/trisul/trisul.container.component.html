@@ -1,0 +1,57 @@
+<div class="trisul-container" [class.trisul-is-mobile]="mobileQuery.matches">
+  <mat-toolbar color="primary" class="mat-elevation">
+    <mat-toolbar-row class="toolbar-row">
+      <button
+        mat-icon-button
+        (click)="sidenav.toggle()"
+        fxShow="true"
+        fxHide.gt-sm
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>
+        {{ "container.nav.bar.trisul" | translate }}
+      </span>
+      <span class="spacer"></span>
+      <div
+        fxShow="true"
+        fxHide.lt-md="true"
+        fxLayout="row"
+        fxLayoutAlign="center center"
+      >
+        <ts-horizontal-main-menu [menuItems]="items"></ts-horizontal-main-menu>
+        <button mat-button *ngIf="isLoggedIn" (click)="logout()">
+          <mat-icon>logout</mat-icon>
+        </button>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav
+      #appDrawer
+      #sidenav
+      mode="over"
+      opened="false"
+      class="w-75"
+      [mode]="mobileQuery.matches ? 'over' : 'over'"
+    >
+      <mat-nav-list>
+        <ts-vertical-menu-component
+          *ngFor="let item of items"
+          [item]="item"
+        ></ts-vertical-menu-component>
+        <span *ngIf="isLoggedIn" fxLayoutAlign="end end" fxLayout="row">
+          <button mat-button (click)="logout()">
+            <mat-icon>logout</mat-icon>
+          </button>
+        </span>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div class="my-3">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

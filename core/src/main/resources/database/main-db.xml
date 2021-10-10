@@ -1,0 +1,19 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+  <!-- Include file to create new table -->
+  <include file="/database/create-table/create-table.xml"/>
+
+  <!-- Include file to create constraint on the table -->
+  <include file="/database/create-constraint/create-constraint.xml"/>
+
+  <!-- Include file to insert default records -->
+  <include file="database/insert-record/insert-records.xml"/>
+
+  <!-- Include file to change anything in existing column new table -->
+
+</databaseChangeLog>

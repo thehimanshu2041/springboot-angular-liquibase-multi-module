@@ -1,0 +1,48 @@
+<div class="mt-5" @zoomInOut>
+  <form class="container-fluid" #loginForm="ngForm">
+    <div class="row justify-content-center">
+      <mat-card class="col-sm-10 col-md-6 col-lg-6 col-xl-4 mat-elevation-z5">
+        <div fxLayoutAlign="center center">
+          <h3>
+            <strong class="ts-primary">{{
+              "main.login.title" | translate
+            }}</strong>
+          </h3>
+        </div>
+        <div class="card-body">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>{{ "main.login.label.username" | translate }}</mat-label>
+            <input
+              matInput
+              name="username"
+              #usernameInput
+              [(ngModel)]="username"
+              required
+              tsAutoFocus="true"
+            />
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <mat-label>{{ "main.login.label.password" | translate }}</mat-label>
+            <input
+              matInput
+              type="password"
+              name="password"
+              required
+              [(ngModel)]="password"
+            />
+          </mat-form-field>
+        </div>
+        <button
+          type="submit"
+          class="w-100"
+          mat-raised-button
+          color="primary"
+          (click)="loginForm.valid ? login() : null"
+        >
+          <mat-icon>login</mat-icon>
+          {{ "main.login.label.login" | translate }}
+        </button>
+      </mat-card>
+    </div>
+  </form>
+</div>

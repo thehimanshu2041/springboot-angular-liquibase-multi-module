@@ -1,0 +1,56 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+  <changeSet author="h3kumar" id="CCET-2041-18092021-01">
+    <preConditions onFail="MARK_RAN">
+      <not>
+        <tableExists tableName="CODE_ENTITY"/>
+      </not>
+    </preConditions>
+    <createTable tableName="CODE_ENTITY">
+      <column autoIncrement="true" name="CODE_ID" type="BIGINT">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="CODE_ENTITY_PK"/>
+      </column>
+      <column name="CODE_CODE_TYPE_ID" type="BIGINT" remarks="parent primary key">
+        <constraints nullable="false"/>
+      </column>
+      <column name="CODE_KEY" type="VARCHAR(10)">
+        <constraints nullable="false" unique="true"/>
+      </column>
+      <column name="CODE_SHORT_DESCRIPTION" type="VARCHAR(100)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="CODE_DESCRIPTION" type="VARCHAR(200)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="CODE_IS_AVAILABLE" type="BOOLEAN">
+        <constraints nullable="false"/>
+      </column>
+      <column name="CODE_PRIORITY" type="BIGINT">
+        <constraints nullable="true"/>
+      </column>
+      <column name="CODE_CREATED_BY" type="VARCHAR(25)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="CODE_UPDATED_BY" type="VARCHAR(25)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="CODE_CREATED_DATE_TIME" type="TIMESTAMP WITHOUT TIME ZONE">
+        <constraints nullable="false"/>
+      </column>
+      <column name="CODE_MODIFIED_DATE_TIME" type="TIMESTAMP WITHOUT TIME ZONE">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+  </changeSet>
+
+  <changeSet author="h3kumar" id="CCETS-2041-18092021-02">
+    <createSequence cycle="false" incrementBy="1" maxValue="2147483647"
+                    minValue="1000000001" sequenceName="CODE_ENTITY_SEQ" startValue="1000000001"/>
+  </changeSet>
+
+</databaseChangeLog>

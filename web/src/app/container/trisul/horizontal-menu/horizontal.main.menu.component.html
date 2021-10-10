@@ -1,0 +1,29 @@
+<mat-nav-list>
+  <span *ngFor="let item of menuItems">
+    <span *ngIf="item.children && item.children.length > 0">
+      <button mat-button [matMenuTriggerFor]="menu" [disabled]="item.disabled">
+        <mat-icon class="mr-1">{{item.menuIcon}}</mat-icon>
+        <span class="mt-1">{{item.menuName}}</span>
+        <mat-icon>
+          arrow_drop_down
+        </mat-icon>
+      </button>
+
+      <mat-menu #menu="matMenu" [overlapTrigger]="false">
+        <span *ngFor="let child of item.children">
+          <button mat-menu-item [routerLink]="child.menuPath">
+            <mat-icon>{{child.menuIcon}}</mat-icon>
+            <span>{{child.menuName}}</span>
+          </button>
+        </span>
+      </mat-menu>
+      <shadow-horizontal-menu #menu [items]="item.children"></shadow-horizontal-menu>
+    </span>
+    <span *ngIf="!item.children || item.children.length === 0">
+      <button mat-button [routerLink]="item.menuPath">
+        <mat-icon class="mr-1">{{item.menuIcon}}</mat-icon>
+        <span>{{item.menuName}}</span>
+      </button>
+    </span>
+  </span>
+</mat-nav-list>

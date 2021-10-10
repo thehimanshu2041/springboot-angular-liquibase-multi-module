@@ -1,0 +1,40 @@
+:host {
+  .trisul-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .trisul-is-mobile {
+    position: fixed;
+    z-index: 2;
+  }
+
+  .trisul-footer-component {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    z-index: 99999999;
+  }
+
+  .mat-nav-list {
+    padding: 0 0 0 0;
+  }
+
+  .sidenav-container {
+    flex: 1;
+  }
+
+  .mat-elevation {
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
+      0 5px 8px 0 rgba(0, 0, 0, 0.14), 0 1px 14px 0 rgba(0, 0, 0, 0.12);
+  }
+}

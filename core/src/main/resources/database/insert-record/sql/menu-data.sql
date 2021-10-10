@@ -1,0 +1,18 @@
+--Menu SQL (Don't edit this file)
+
+-- Insert Into MENU_ENTITY
+INSERT INTO
+MENU_ENTITY
+( MENU_ID, MENU_PARENT_ID, MENU_NAME, MENU_PATH, MENU_DESCRIPTION, MENU_ICON, MENU_KEY,
+MENU_ACTIVE, MENU_IS_DELETED, MENU_IS_ADMIN, MENU_IS_VISIBLE, MENU_IS_AUTH_REQ, MENU_PRIORITY,
+MENU_CREATED_BY, MENU_UPDATED_BY, MENU_CREATED_DATE_TIME, MENU_MODIFIED_DATE_TIME )
+VALUES
+( NEXTVAL('MENU_ENTITY_SEQ'), 0, 'Login', '/login', 'Login', 'home', 'LOGIN',
+true, false, false, true, false, 1,
+'ENGINE', 'ENGINE', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP ),
+( NEXTVAL('MENU_ENTITY_SEQ'), 0, 'Registration', '/registration', 'Registration', 'login', 'REGISTRATION',
+true, false, false, true, false, 2,
+'ENGINE', 'ENGINE', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP ),
+( NEXTVAL('MENU_ENTITY_SEQ'), 0, 'Dashboard', '/dashboard', 'Dashboard', 'dashboard', 'DASHBOARD',
+true, false, false, true, true, 3,
+'ENGINE', 'ENGINE', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);

@@ -1,0 +1,1007 @@
+openapi: 3.0.1
+info:
+  title: Trisul Service
+  description: Trisul Service
+  version: "0.1"
+servers:
+  - url: http://localhost:2041/trisul
+    description: Generated server url
+tags:
+  - name: Static Data Service
+    description: Static Data Service.
+  - name: User Service
+    description: User Service.
+  - name: Menu Service
+    description: Menu Service.
+  - name: Auth Service
+    description: Auth Service.
+paths:
+  /service/menu:
+    get:
+      tags:
+        - Menu Service
+      summary: Menu List
+      description: It will give you list of configured menu.
+      operationId: getMenuList
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "401":
+          description: Unauthorized
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "403":
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "200":
+          description: Operation Successful
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MenuDetail'
+      security:
+        - Authorization: []
+    post:
+      tags:
+        - Menu Service
+      summary: Menu Detail
+      description: It will create a new menu item.
+      operationId: createMenu
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MenuDetail'
+        required: true
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "401":
+          description: Unauthorized
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "403":
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "200":
+          description: Operation Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MenuDetail'
+  /service/auth/registration:
+    post:
+      tags:
+        - Auth Service
+      summary: User Registration
+      description: It will create a new user with user role.
+      operationId: doRegistration
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserDetail'
+        required: true
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "401":
+          description: Unauthorized
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "403":
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "200":
+          description: Operation Successful
+          content:
+            application/json:
+              schema:
+                type: boolean
+  /service/auth/login:
+    post:
+      tags:
+        - Auth Service
+      summary: User login
+      description: User login
+      operationId: doLogin
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginDetail'
+        required: true
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "401":
+          description: Unauthorized
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "403":
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "200":
+          description: Operation Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationDetail'
+  /service/static-data/tiles:
+    get:
+      tags:
+        - Static Data Service
+      summary: Tile
+      description: It will give you list of configured Tile.
+      operationId: getConfiguredTile
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "401":
+          description: Unauthorized
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "403":
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "200":
+          description: Operation Successful
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ManagedContent'
+  /service/static-data/states/{countryId}:
+    get:
+      tags:
+        - Static Data Service
+      summary: States
+      description: It will give you list of States.
+      operationId: getStatesByCountryId
+      parameters:
+        - name: countryId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "401":
+          description: Unauthorized
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "403":
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "200":
+          description: Operation Successful
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CscDetail'
+  /service/static-data/country/{countryKey}:
+    get:
+      tags:
+        - Static Data Service
+      summary: Country
+      description: It will give you country detail by country code key.
+      operationId: getCountryByCountryKey
+      parameters:
+        - name: countryKey
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "401":
+          description: Unauthorized
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "403":
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "200":
+          description: Operation Successful
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CscDetail'
+  /service/static-data/countries:
+    get:
+      tags:
+        - Static Data Service
+      summary: Countries
+      description: It will give you list of countries.
+      operationId: getCountries
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "401":
+          description: Unauthorized
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "403":
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "200":
+          description: Operation Successful
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CscDetail'
+  /service/static-data/codes/{codeType}:
+    get:
+      tags:
+        - Static Data Service
+      summary: Code
+      description: It will give you list of code by code type.
+      operationId: getCodeType
+      parameters:
+        - name: codeType
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "401":
+          description: Unauthorized
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "403":
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "200":
+          description: Operation Successful
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CodeDetail'
+  /service/static-data/code/{codeKey}:
+    get:
+      tags:
+        - Static Data Service
+      summary: Code
+      description: It will give you code detail by code key.
+      operationId: getCode
+      parameters:
+        - name: codeKey
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "401":
+          description: Unauthorized
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "403":
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "200":
+          description: Operation Successful
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CodeDetail'
+  /service/static-data/cities/{stateId}:
+    get:
+      tags:
+        - Static Data Service
+      summary: Cities
+      description: It will give you list of Cities.
+      operationId: getCitiesByStateId
+      parameters:
+        - name: stateId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "401":
+          description: Unauthorized
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "403":
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "200":
+          description: Operation Successful
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CscDetail'
+  /service/api/user:
+    get:
+      tags:
+        - User Service
+      summary: User detail
+      description: User detail
+      operationId: getUserDetail
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "401":
+          description: Unauthorized
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "403":
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "200":
+          description: Operation Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDetail'
+      security:
+        - Authorization: []
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        description:
+          type: string
+    ErrorMessage:
+      type: object
+      properties:
+        status:
+          type: integer
+          format: int32
+        timestamp:
+          type: string
+          format: date-time
+        error:
+          $ref: '#/components/schemas/Error'
+    MenuDetail:
+      required:
+        - menuDescription
+        - menuIcon
+        - menuIsActive
+        - menuIsAdmin
+        - menuIsAuthReq
+        - menuIsDeleted
+        - menuIsVisible
+        - menuKey
+        - menuName
+        - menuParentID
+        - menuPath
+        - menuPriority
+      type: object
+      properties:
+        menuID:
+          type: integer
+          description: Provide menuID.
+          format: int64
+        menuParentID:
+          type: integer
+          description: Provide parent menuID.
+          format: int64
+        menuName:
+          maxLength: 50
+          minLength: 2
+          type: string
+          description: Provide menu name.
+          format: string
+        menuPath:
+          maxLength: 50
+          minLength: 2
+          type: string
+          description: Provide menu path.
+          format: string
+        menuDescription:
+          maxLength: 50
+          minLength: 5
+          type: string
+          description: Provide menu description.
+          format: string
+        menuIcon:
+          maxLength: 50
+          minLength: 2
+          type: string
+          description: Provide menu icon.
+          format: string
+        menuKey:
+          maxLength: 50
+          minLength: 2
+          type: string
+          description: Provide menu key.
+          format: string
+        menuIsActive:
+          type: boolean
+          description: Provide menu active status.
+          format: boolean
+        menuIsDeleted:
+          type: boolean
+          description: Provide menu deleted status.
+          format: boolean
+        menuIsAdmin:
+          type: boolean
+          description: Provide menu admin status.
+          format: boolean
+        menuIsVisible:
+          type: boolean
+          description: Provide menu visibility status.
+          format: boolean
+        menuIsAuthReq:
+          type: boolean
+          description: Provide menu auth status.
+          format: boolean
+        menuPriority:
+          type: integer
+          description: Provide menu priority.
+          format: int64
+        children:
+          type: array
+          items:
+            $ref: '#/components/schemas/MenuDetail'
+      description: Menu Detail
+    AddressDetail:
+      required:
+        - addressAddress1
+        - addressCity
+        - addressCountry
+        - addressState
+      type: object
+      properties:
+        addressID:
+          type: integer
+          description: Provide address id
+          format: int64
+        addressAddress1:
+          type: string
+          description: Provide address 1.
+          format: string
+        addressAddress2:
+          type: string
+          description: Provide address 2.
+          format: string
+        addressAddress3:
+          type: string
+          description: Provide address 3.
+          format: string
+        addressCity:
+          $ref: '#/components/schemas/CscDetail'
+        addressState:
+          $ref: '#/components/schemas/CscDetail'
+        addressCountry:
+          $ref: '#/components/schemas/CscDetail'
+      description: Address Detail
+    CardDetail:
+      required:
+        - cardCvv
+        - cardExpireMonth
+        - cardExpireYear
+        - cardFirstName
+        - cardLastName
+        - cardNumber
+      type: object
+      properties:
+        cardID:
+          type: integer
+          description: Provide card id
+          format: int64
+        cardNumber:
+          type: integer
+          description: Provide card number.
+          format: int64
+        cardFirstName:
+          type: string
+          description: Provide first name.
+          format: string
+        cardLastName:
+          type: string
+          description: Provide card last name.
+          format: string
+        cardExpireMonth:
+          type: integer
+          description: Provide card expire month.
+          format: int64
+        cardExpireYear:
+          type: integer
+          description: Provide card expire year.
+          format: int64
+        cardCvv:
+          type: integer
+          description: Provide card cvv.
+          format: int64
+      description: Card Detail
+    CodeDetail:
+      required:
+        - codeDescription
+        - codeID
+        - codeKey
+        - codePriority
+        - codeShortDescription
+        - codeType
+      type: object
+      properties:
+        codeID:
+          type: integer
+          description: Provide code id
+          format: int64
+        codeKey:
+          type: string
+          description: Provide code key
+          format: string
+        codeType:
+          type: string
+          description: Provide code type
+          format: string
+        codeShortDescription:
+          type: string
+          description: Provide code short description
+          format: string
+        codeDescription:
+          type: string
+          description: Provide code description
+          format: string
+        codePriority:
+          type: integer
+          description: Provide code priority
+          format: int64
+      description: Code Detail
+    CscDetail:
+      required:
+        - cscCodeID
+        - cscDescription
+        - cscID
+        - cscKey
+        - cscPriority
+        - cscShortDescription
+        - cscType
+      type: object
+      properties:
+        cscID:
+          type: integer
+          description: Provide id
+          format: int64
+        cscKey:
+          type: string
+          description: Provide key
+          format: string
+        cscShortDescription:
+          type: string
+          description: Provide short description
+          format: string
+        cscDescription:
+          type: string
+          description: Provide description
+          format: string
+        cscPriority:
+          type: integer
+          description: Provide priority
+          format: int64
+        cscCodeID:
+          type: integer
+          description: Provide code id
+          format: int64
+        cscType:
+          type: string
+          description: Provide type
+          enum:
+            - COUNTRY
+            - STATE
+            - CITY
+      description: Csc Detail
+    UserDetail:
+      required:
+        - addressDetail
+        - cardDetail
+        - dob
+        - email
+        - firstName
+        - gender
+        - lastName
+        - mobile
+        - password
+        - title
+        - username
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Provide id
+          format: int64
+        username:
+          type: string
+          description: Provide username
+          format: string
+        email:
+          type: string
+          description: Provide email
+          format: string
+        password:
+          type: string
+          description: Provide password
+          format: string
+        title:
+          $ref: '#/components/schemas/CodeDetail'
+        firstName:
+          maxLength: 20
+          minLength: 5
+          type: string
+          description: Provide firstname
+          format: string
+        lastName:
+          maxLength: 20
+          minLength: 2
+          type: string
+          description: Provide lastname
+          format: string
+        gender:
+          $ref: '#/components/schemas/CodeDetail'
+        dob:
+          type: string
+          description: Provide dob
+          format: date-time
+        mobile:
+          type: string
+          description: Provide mobile
+          format: string
+        addressDetail:
+          $ref: '#/components/schemas/AddressDetail'
+        cardDetail:
+          $ref: '#/components/schemas/CardDetail'
+      description: UserDetail model
+    LoginDetail:
+      required:
+        - password
+        - username
+      type: object
+      properties:
+        username:
+          type: string
+          description: Provide username
+          format: string
+        password:
+          type: string
+          description: Provide password
+          format: string
+      description: Login detail
+    AuthenticationDetail:
+      required:
+        - access_token
+        - roles
+      type: object
+      properties:
+        access_token:
+          type: string
+          description: Provided access token
+          format: string
+        roles:
+          uniqueItems: true
+          type: array
+          description: User roles
+          items:
+            type: string
+            description: User roles
+      description: Authentication Detail
+    ManagedContent:
+      type: object
+      properties:
+        html:
+          type: string
+          description: html
+          format: string
+        tile:
+          $ref: '#/components/schemas/ManagedContentTile'
+      description: Managed Content
+    ManagedContentTile:
+      type: object
+      properties:
+        key:
+          type: string
+          description: key
+          format: string
+        type:
+          type: string
+          description: type
+          format: string
+        title:
+          type: string
+          description: title
+          format: string
+        description:
+          type: string
+          description: description
+          format: string
+        icon:
+          type: string
+          description: icon
+          format: string
+        isDelete:
+          type: boolean
+          description: isDelete
+          format: boolean
+        isAccessed:
+          type: boolean
+          description: isAccessed
+          format: boolean
+      description: Managed Content Tile
+  securitySchemes:
+    Authorization:
+      type: http
+      description: "**The API operations may require HTTP Bearer authentication scheme\
+        \ with JWT format as defined in Open API 3.0.**\nAn Authorization header must\
+        \ be present if the operation requires authorization, \n\nfor example:\n```\n\
+        Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c\n\
+        ```\n"
+      scheme: bearer
+      bearerFormat: JWT

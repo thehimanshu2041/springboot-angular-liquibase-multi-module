@@ -1,0 +1,41 @@
+server:
+  port: 2041
+  servlet:
+    context-path: /trisul
+
+spring:
+  banner:
+    location: classpath:banner.txt
+  jpa:
+    database: POSTGRESQL
+    show-sql: false
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+    hibernate:
+      ddl-auto: none
+  datasource:
+    platform: postgres
+    url: jdbc:postgresql://localhost:5432/trisulmanager
+    username: postgres
+    password: root
+    driver-class-name: org.postgresql.Driver
+    connectionTimeout: 4000000
+    auto-commit: false
+    hikari:
+      auto-commit: false
+  liquibase:
+    change-log: 'classpath:database/main-db.xml'
+
+logging:
+  level:
+    root: INFO
+
+springdoc:
+  api-docs:
+    path: /swagger-docs
+  swagger-ui:
+    path: /swagger-docs.html
+    url: swagger-docs.yaml

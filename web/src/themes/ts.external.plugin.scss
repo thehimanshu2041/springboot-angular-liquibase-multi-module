@@ -1,0 +1,14 @@
+$flagsImagePath: "~intl-tel-input/build/img/" !default;
+@import "~intl-tel-input/src/css/intlTelInput";
+
+.mat-form-field:not(.mat-focused) .ts-tel-input-placeholder.mat-empty {
+  margin-left: 53px;
+}
+
+.ts-tel-input-with-value:disabled {
+  cursor: pointer;
+}
+
+.iti--container {
+  position: fixed;
+}

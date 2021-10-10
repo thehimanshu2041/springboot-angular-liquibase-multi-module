@@ -1,0 +1,16 @@
+@function get-default-type-config($font-family: $font-family-base) {
+  @return mat-typography-config($font-family: '#{$font-family}',
+    $display-4: mat-typography-level($display1-size, $display-line-height, $display1-weight),
+    $display-3: mat-typography-level($display2-size, $display-line-height, $display2-weight),
+    $display-2: mat-typography-level($display3-size, $display-line-height, $display3-weight),
+    $display-1: mat-typography-level($display4-size, $display-line-height, $display4-weight),
+    $headline: mat-typography-level($h3-font-size, $headings-line-height, $font-weight-base),
+    $title: mat-typography-level($h4-font-size, $headings-line-height, $headings-font-weight),
+    $subheading-2: mat-typography-level($h6-font-size, $headings-line-height, $font-weight-base),
+    $subheading-1: mat-typography-level($h5-font-size, $headings-line-height, $headings-font-weight),
+    $body-2: mat-typography-level($font-size-base, $line-height-base, $font-weight-base),
+    $body-1: mat-typography-level($font-size-base, $line-height-base, $font-weight-base),
+    $caption: mat-typography-level($font-size-base, $line-height-base, $font-weight-base),
+    $button: mat-typography-level($font-size-base, $line-height-base * 0.8, $headings-font-weight),
+    $input: mat-typography-level(inherit, $line-height-base * 0.8, $font-weight-base));
+}

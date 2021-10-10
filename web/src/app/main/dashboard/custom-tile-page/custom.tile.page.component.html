@@ -1,0 +1,183 @@
+<ng-container *ngTemplateOutlet="editToolTmpl"></ng-container>
+<ng-template #editToolTmpl>
+  <div class="mb-3" fxLayoutAlign="end end">
+    <button
+      mat-mini-fab
+      (click)="toggleEditing()"
+      color="accent"
+      *ngIf="!editing; else editButtons"
+    >
+      <mat-icon>edit</mat-icon>
+    </button>
+    <ng-template #editButtons>
+      <button
+        mat-flat-button
+        color="primary"
+        (click)="toggleEditing()"
+        [disabled]="saving"
+      >
+        <div class="d-flex align-items-center">
+          <mat-icon>check</mat-icon>
+          <mat-progress-spinner
+            mode="indeterminate"
+            *ngIf="saving"
+          ></mat-progress-spinner>
+          <span>OK</span>
+        </div>
+      </button>
+    </ng-template>
+  </div>
+</ng-template>
+<div
+  class="content-container animated zoomIn"
+  [class.content-container-single-column]="singleColumnMode"
+  [class.content-cards]="asCards"
+  ngxDroppable
+>
+  <ng-template ngFor [ngForOf]="contents" let-c let-i="index">
+    <div
+      [ngClass]="'content-item-' + c.tile.type | lowercase"
+      *ngIf="c.tile"
+      ngxDraggable
+      [model]="c"
+      [class.content-item-card]="asCards"
+      [@zoomInOut]
+    >
+      <div
+        [class.card]="asCards"
+        class="position-relative shadow"
+        [ngClass]="isNightMode ? 'bg-dark' : ''"
+      >
+        <div
+          [class.d-none]="!getTileContext(i)?.framed || !asCards || editing"
+          class="card-header bg-transparent py-2"
+          [attr.role]="contentActions[i] ? 'button' : ''"
+          (click)="headerClicked(i)"
+        >
+          <div
+            fxLayout="row"
+            fxLayoutAlign="start center"
+            class="mt-3"
+            ngClass.gt-sm="content-item-header-fixed"
+          >
+            <div
+              fxFlex="grow"
+              class="h5"
+              [ngClass]="isNightMode ? 'text-night-mode' : 'text-day-mode'"
+            >
+              {{ getTileContext(i)?.title }}
+            </div>
+            <ng-container #contentActionContainer></ng-container>
+          </div>
+        </div>
+        <div
+          [class.d-none]="!editing"
+          class="card-header draggable-handler"
+          ngxDragHandle
+        >
+          <button
+            mat-mini-fab
+            class="position-absolute content-tile-menu"
+            color="default"
+            [matMenuTriggerFor]="optionMenu"
+          >
+            <mat-icon>more_horiz</mat-icon>
+          </button>
+          <mat-menu #optionMenu="matMenu" [overlapTrigger]="true">
+            <button
+              mat-menu-item
+              [matMenuTriggerFor]="sizeMenu"
+              [disabled]="singleColumnMode"
+            >
+              <mat-icon>photo_size_select_small</mat-icon>Size
+            </button>
+            <button mat-menu-item (click)="deleteTile(i)">
+              <mat-icon>delete</mat-icon>Delete
+            </button>
+          </mat-menu>
+          <mat-menu #sizeMenu="matMenu">
+            <ng-template ngFor [ngForOf]="tileSpecs" let-ts>
+              <button
+                mat-menu-item
+                (click)="setTileSize(i, ts)"
+                [disabled]="toCellString(ts) === c.tile.type"
+                [class.bg-faded]="toCellString(ts) === c.tile.type"
+              >
+                <ng-container
+                  *ngTemplateOutlet="
+                    sizeLegend;
+                    context: { cols: ts[0], rows: ts[1] }
+                  "
+                >
+                </ng-container>
+              </button>
+            </ng-template>
+          </mat-menu>
+          <div class="h5 mb-0 text-center">{{ getTileContext(i)?.title }}</div>
+        </div>
+        <div
+          [ngClass]="{
+            'card-body':
+              asCards &&
+              getTileContext(i)?.framed &&
+              getTileContext(i)?.expanded
+          }"
+          class="d-flex flex-column align-items-stretch"
+          [class.px-3]="!getTileContext(i)?.expanded"
+        >
+          <ng-container #contentItemContainer></ng-container>
+        </div>
+        <div
+          class="card-footer bg-transparent pt-0 d-none"
+          (cdkObserveContent)="footerContentChanged(i)"
+          [debounce]="100"
+        >
+          <ng-container #contentFooterContainer></ng-container>
+        </div>
+        <div
+          class="content-item-overlay position-absolute d-none"
+          (cdkObserveContent)="overlayContentChanged(i)"
+          [debounce]="100"
+        >
+          <ng-container #contentOverlayContainer></ng-container>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="!c.tile" ngxDraggable [moves]="false">
+      <ng-container #contentItemContainer></ng-container>
+      <ng-container #contentActionContainer></ng-container>
+      <ng-container #contentFooterContainer></ng-container>
+      <ng-container #contentOverlayContainer></ng-container>
+    </div>
+  </ng-template>
+</div>
+
+<ng-template #sizeLegend let-cols="cols" let-rows="rows">
+  <div class="d-flex align-items-center">
+    <div>
+      <ng-template ngFor [ngForOf]="[1, 2, 3]" let-i>
+        <div
+          *ngIf="i <= (rows || 1)"
+          fxLayout="row"
+          fxLayoutGap="1px"
+          [style.margin-top]="i > 1 ? '1px' : ''"
+        >
+          <div
+            *ngFor="let ii of [1, 2, 3]"
+            class="p-1 bg-dark"
+            [style.opacity]="ii <= cols ? '.6' : '.1'"
+          ></div>
+        </div>
+      </ng-template>
+    </div>
+    <div class="ml-3">
+      {{ cols }} x {{ rows }}
+      <ng-container *ngIf="!rows">*</ng-container>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #contentItemHtml let-content>
+  <div [innerHTML]="content"></div>
+</ng-template>
